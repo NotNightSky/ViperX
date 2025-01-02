@@ -12,7 +12,7 @@ Just a simple minecraft project/plugin that clears any player's inventory when b
 
 ## Roadmap
 
-[x] Add ban listener
+- [x] #739 Add ban listener
 
 [x] Add core plugin logic
 
