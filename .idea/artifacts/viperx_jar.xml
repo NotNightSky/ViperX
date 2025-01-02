@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="viperx:jar">
+    <output-path>G:/test server/plugins</output-path>
+    <root id="archive" name="viperx.jar">
+      <element id="module-output" name="viperx" />
+    </root>
+  </artifact>
+</component>
