@@ -59,6 +59,14 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>mvnrepository.com</id>
+            <url>https://mvnrepository.com</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -68,5 +76,13 @@
             <version>1.21.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.DevLeoko.AdvancedBan/AdvancedBan-Bukkit -->
+        <dependency>
+            <groupId>com.github.DevLeoko.AdvancedBan</groupId>
+            <artifactId>AdvancedBan-Bukkit</artifactId>
+            <version>v2.3.0</version>
+        </dependency>
     </dependencies>
 </project>
+
+
