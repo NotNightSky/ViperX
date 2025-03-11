@@ -1,5 +1,5 @@
 
-# Project Title
+# ViperX
 
 Just a simple minecraft project/plugin that clears any player's inventory when banned 
 
