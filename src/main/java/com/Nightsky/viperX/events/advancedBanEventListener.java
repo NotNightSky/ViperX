@@ -1,19 +1,39 @@
-/*package com.Nightsky.viperX.events;
+package com.Nightsky.viperX.events;
 import com.Nightsky.viperX.main;
-import me.leoko.advancedban.utils.PunishmentType;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.bukkit.event.Listener;
 import me.leoko.advancedban.bukkit.event.PunishmentEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 
+import java.io.File;
+import java.util.UUID;
+
+/*
+    Explosive Listener
+    Recommended not to use
+
+ */
 public class advancedBanEventListener implements Listener {
-    public void onEvent(PunishmentEvent event, Player player){
-        if (event.getPunishment().getType().equals(PunishmentType.TEMP_BAN) || event.getPunishment().getType().equals(PunishmentType.TEMP_IP_BAN)){
-            main.getPlugin().getLogger().info(event.getPunishment().getDuration(true));
-        }
+   @EventHandler(priority = EventPriority.MONITOR)
+    public void onEvent(PunishmentEvent punishment){
+       String playerName = punishment.getPunishment().getName();
+       OfflinePlayer offPlayer= Bukkit.getServer().getOfflinePlayer(playerName);
 
+       UUID id = offPlayer.getUniqueId();
+
+       main.getPlugin().getLogger().info("location should be " + id);
+
+       File playerDataFileMain = new File(Bukkit.getWorlds().getFirst().getWorldFolder(), "playerdata" + File.separator + id + ".dat");
+
+       playerDataFileMain.delete();
+
+       File playerDataFileOld = new File(Bukkit.getWorlds().getFirst().getWorldFolder(), "playerdata" + File.separator + id + ".dat_old");
+
+       playerDataFileOld.delete();
+
+       main.getPlugin().getLogger().info("Main data file location should be " + playerDataFileMain);
+       main.getPlugin().getLogger().info("Old data file location should be " + playerDataFileOld);
     }
 }
-
-Abandoned code
- */

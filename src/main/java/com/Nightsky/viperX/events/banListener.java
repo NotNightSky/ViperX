@@ -10,7 +10,8 @@ public class banListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBan(PlayerKickEvent event){
         Player player = event.getPlayer();
-        if (event.getCause().equals(PlayerKickEvent.Cause.BANNED) || event.getCause().equals(PlayerKickEvent.Cause.IP_BANNED))
+        if (event.getCause().equals(PlayerKickEvent.Cause.BANNED) || event.getCause().equals(PlayerKickEvent.Cause.IP_BANNED)) {
             player.getInventory().clear();
+        }
     }
 }
