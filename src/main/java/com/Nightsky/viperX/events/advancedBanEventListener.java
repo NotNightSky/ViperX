@@ -23,8 +23,6 @@ public class advancedBanEventListener implements Listener {
 
        UUID id = offPlayer.getUniqueId();
 
-       main.getPlugin().getLogger().info("location should be " + id);
-
        File playerDataFileMain = new File(Bukkit.getWorlds().getFirst().getWorldFolder(), "playerdata" + File.separator + id + ".dat");
 
        playerDataFileMain.delete();
@@ -32,8 +30,5 @@ public class advancedBanEventListener implements Listener {
        File playerDataFileOld = new File(Bukkit.getWorlds().getFirst().getWorldFolder(), "playerdata" + File.separator + id + ".dat_old");
 
        playerDataFileOld.delete();
-
-       main.getPlugin().getLogger().info("Main data file location should be " + playerDataFileMain);
-       main.getPlugin().getLogger().info("Old data file location should be " + playerDataFileOld);
     }
 }
