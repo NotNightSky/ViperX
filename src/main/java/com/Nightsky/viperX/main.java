@@ -7,11 +7,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class main extends JavaPlugin {
 
-    private static main plugin;
+    //private static main plugin;
 
     @Override
     public void onEnable() {
-        plugin = this;
+        //plugin = this;
         getLogger().info("up and running");
         this.registerListener();
 
@@ -27,9 +27,10 @@ public final class main extends JavaPlugin {
         getLogger().info("shutting down");
     }
 
-    public static main getPlugin() {
+/*    public static main getPlugin() {
         return plugin;
     }
+*/
 }
 
 
