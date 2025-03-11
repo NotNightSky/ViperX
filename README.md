@@ -18,5 +18,5 @@ Plugin Logic
 
 Advanced ban
   - [ ] custom duration ban   
-  - [ ] banlistener
+  - [x] adding ban listener
 
