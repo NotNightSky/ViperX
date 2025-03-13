@@ -1,0 +1,7 @@
+#False:Does not warn the currently logged-in admin, If the server is in offline mode
+#True:Warns the currently logged-in admin, If the server is in offline mode
+offline-mode-warning: true
+
+#False: Stops from clearing banned player's inventory while using advanced ban
+#True: Clears player's inventory when banned using Advanced ban
+use-advanced-ban: ture
