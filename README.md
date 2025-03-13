@@ -1,19 +1,19 @@
 
 # ViperX
 
-Just a simple minecraft project/plugin that clears any player's inventory when banned 
+Just a simple minecraft project/plugin that clears any player's inventory when banned and is experimentally compatible with advanced ban plugin
 
 
 ## Authors
 
-- [@xmoderlive](https://www.github.com/xmoderlive)
+- [NotNightSky](https://www.github.com/xmoderlive)
 
 
 
 ## Roadmap
 Plugin Logic
   - [x] Add ban listener
-  - [ ] Add config
+  - [x] Add config
 
 Advanced ban
   - [ ] custom duration ban   
