@@ -1,3 +1,8 @@
+# Rewriting Of the Project
+
+Rewriting of the project will take place using gradle to improve scalability
+
+
 # ViperX
 
 Just a simple minecraft project/plugin that clears any player's inventory when banned and is experimentally compatible with advanced ban plugin
