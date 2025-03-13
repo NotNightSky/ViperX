@@ -13,8 +13,7 @@ Just a simple minecraft project/plugin that clears any player's inventory when b
 ## Roadmap
 Plugin Logic
   - [x] Add ban listener
-  - [x] Add customizability
-  - [ ] Add saving data
+  - [ ] Add config
 
 Advanced ban
   - [ ] custom duration ban   
