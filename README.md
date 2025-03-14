@@ -1,6 +1,3 @@
-//# Rewriting Of the Project
-
-//Rewriting of the project will take place using gradle to improve scalability(Tbh I don't know what it improves but I like Gradlew)
 
 
 # ViperX
