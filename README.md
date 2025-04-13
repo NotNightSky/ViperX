@@ -1,6 +1,6 @@
 # Project on Hold
 
-currently the project has been kept on hols as the builds no longer seem to work
+currently the project has been kept on hold as the newer builds no longer seem to work and there is a likelihood that the project will be rewritten from scratch
 
 # ViperX
 
@@ -17,11 +17,11 @@ Just a simple minecraft project/plugin that clears any player's inventory when b
 
 ### Plugin Logic
 - [ ] Implementation of NBT api
-- [x] Add ban listener
-- [x] Add config
+- [ ] Add ban listener
+- [ ] Add config
 
 ### Advanced ban
 - [ ] Add soft dependency
 - [ ] custom duration ban   
-- [x] adding ban listener
+- [ ] adding ban listener
 
