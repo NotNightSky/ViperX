@@ -1,5 +1,5 @@
 # Note:-
-          This is the development, every single pull request shall be opened here,tested and later merged with main branch
+This is the development, every single pull request shall be opened here,tested and later merged with main branch
 
 # ViperX
 
