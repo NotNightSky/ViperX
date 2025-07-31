@@ -1,5 +1,4 @@
 package com.Nightsky.viperX.events;
-import com.Nightsky.viperX.main;
 import me.leoko.advancedban.bukkit.event.PunishmentEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -31,4 +30,6 @@ public class advancedBanEventListener implements Listener {
 
        playerDataFileOld.delete();
     }
+
+
 }
