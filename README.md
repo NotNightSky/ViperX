@@ -1,5 +1,3 @@
-# Note:-
-This is the development branch, every single pull request shall be opened here,tested and later merged with main branch
 
 # ViperX
 
