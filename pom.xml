@@ -9,7 +9,7 @@
     <version>0.4</version>
     <packaging>jar</packaging>
 
-    <name>viperx</name>
+    <name>ViperX</name>
 
     <properties>
         <java.version>21</java.version>
