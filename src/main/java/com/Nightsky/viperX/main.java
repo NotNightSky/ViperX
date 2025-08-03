@@ -19,7 +19,6 @@ public final class main extends JavaPlugin {
     }
 
     public void registerListener(){
-        getServer().getPluginManager().registerEvents(new banListener(), this);
         getServer().getPluginManager().registerEvents(new onJoinWarn(), this);
 
         if (getServer().getPluginManager().getPlugin("AdvancedBan") != null){
@@ -27,6 +26,7 @@ public final class main extends JavaPlugin {
             getLogger().info("AdvancedBan is found and being used");
         } else {
             getLogger().info("AdvancedBan not found therefore using the vanilla ban system");
+            getServer().getPluginManager().registerEvents(new banListener(), this);
         }
     }
 
