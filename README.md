@@ -18,7 +18,7 @@ Just a simple minecraft project/plugin that clears any player's inventory when b
 
 ### Advanced ban
 - [X] Add soft dependency
-- [ ] custom duration ban   
+- [X] custom duration ban   
 - [X] adding ban listener
 
 ### LiteBans(important)
