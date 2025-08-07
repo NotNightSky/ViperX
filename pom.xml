@@ -6,7 +6,7 @@
 
     <groupId>com.Nightsky</groupId>
     <artifactId>viperx</artifactId>
-    <version>0.4</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>ViperX</name>
@@ -77,7 +77,6 @@
             <version>1.21.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.github.DevLeoko.AdvancedBan/AdvancedBan-Bukkit -->
         <dependency>
             <groupId>com.github.DevLeoko.AdvancedBan</groupId>
             <artifactId>AdvancedBan-Bukkit</artifactId>

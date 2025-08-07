@@ -3,6 +3,7 @@ package com.Nightsky.viperX;
 import com.Nightsky.viperX.events.advancedBanEventListener;
 import com.Nightsky.viperX.events.banListener;
 import com.Nightsky.viperX.events.onJoinWarn;
+import com.Nightsky.viperX.utils.metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class main extends JavaPlugin {
@@ -10,6 +11,8 @@ public final class main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        int pluginId = 26811;
+        metrics metrics = new metrics(this, pluginId);
         saveDefaultConfig();
 
         plugin = this;
