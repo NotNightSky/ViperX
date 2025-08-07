@@ -10,7 +10,7 @@ Just a simple minecraft project/plugin that clears any player's inventory when b
 
 ### bStats
 
-[![bStats Stats](https://bstats.org/signatures/bukkit/ViperX)](https://bstats.org/plugin/bukkit/ViperX)
+[![bStats Stats](https://bstats.org/signatures/bukkit/ViperX.svg)](https://bstats.org/plugin/bukkit/ViperX)
 
 ## Roadmap
 
