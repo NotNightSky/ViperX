@@ -14,9 +14,8 @@ Just a simple minecraft project/plugin that clears any player's inventory when b
 
 ## Roadmap
 
-### Plugin Logic
+### Vanilla
 - [X] Add ban listener
-- [X] Add config
 
 ### Advanced ban
 - [X] Add soft dependency
