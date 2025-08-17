@@ -2,6 +2,7 @@ package com.Nightsky.viperX;
 
 import com.Nightsky.viperX.events.advancedBanEventListener;
 import com.Nightsky.viperX.events.banListener;
+import com.Nightsky.viperX.events.liteBansEventListener;
 import com.Nightsky.viperX.events.onJoinWarn;
 import com.Nightsky.viperX.utils.metrics;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,9 +28,12 @@ public final class main extends JavaPlugin {
         if (getServer().getPluginManager().getPlugin("AdvancedBan") != null){
             getServer().getPluginManager().registerEvents(new advancedBanEventListener(), this);
             getLogger().info("AdvancedBan is found and being used");
+        } else if (getServer().getPluginManager().getPlugin("LiteBans") != null) {
+            new liteBansEventListener().register();
+            getLogger().info("LiteBans is found and being used");
         } else {
-            getLogger().info("AdvancedBan not found therefore using the vanilla ban system");
             getServer().getPluginManager().registerEvents(new banListener(), this);
+            getLogger().info("Litebans not found therefore using the vanilla ban system");
         }
     }
 

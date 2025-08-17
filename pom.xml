@@ -6,7 +6,7 @@
 
     <groupId>com.Nightsky</groupId>
     <artifactId>viperx</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>ViperX</name>
@@ -81,6 +81,12 @@
             <groupId>com.github.DevLeoko.AdvancedBan</groupId>
             <artifactId>AdvancedBan-Bukkit</artifactId>
             <version>2.3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.gitlab.ruany</groupId>
+            <artifactId>LiteBansAPI</artifactId>
+            <version>0.6.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
