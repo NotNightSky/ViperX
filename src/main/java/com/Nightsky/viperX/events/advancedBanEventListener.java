@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class advancedBanEventListener implements Listener {
+
     @EventHandler(priority = EventPriority.MONITOR)
     public void onEvent(PunishmentEvent punishment) {
         Instant start = Instant.ofEpochMilli(punishment.getPunishment().getStart());
@@ -24,7 +25,7 @@ public class advancedBanEventListener implements Listener {
 
         Duration duration = Duration.between(start, end);
         long banDuration = duration.toMillis();
-        List<String> durationList = main.getPlugin().getConfig().getStringList("advancedban.ban-Durations.duration");
+        List<String> durationList = main.getPlugin().getConfig().getStringList("advancedban.ban-durations.duration");
         List<Long> parsedDurations = new ArrayList<>();
         main.getPlugin().getLogger().info(String.valueOf(main.getPlugin().getConfig().getInt("advancedban.ban-Durations.grace-period")));
         if(punishment.getPunishment().getType() == PunishmentType.BAN){

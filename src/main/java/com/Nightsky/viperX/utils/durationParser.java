@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class durationParser {
     //Don't ask me to explain me this code, I did not write this
-    //some unused stuff will be used with liteban so do not remove it
+    //some unused stuff will be used with litebans so do not remove them
     private static final Map<String, Long> timeUnits = new HashMap<>();
 
     static {

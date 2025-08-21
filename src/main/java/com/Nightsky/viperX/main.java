@@ -1,14 +1,14 @@
 package com.Nightsky.viperX;
 
-import com.Nightsky.viperX.events.advancedBanEventListener;
-import com.Nightsky.viperX.events.banListener;
-import com.Nightsky.viperX.events.liteBansEventListener;
-import com.Nightsky.viperX.events.onJoinWarn;
+import com.Nightsky.viperX.events.*;
+import com.Nightsky.viperX.utils.pendingManager;
 import com.Nightsky.viperX.utils.metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class main extends JavaPlugin {
+public class main extends JavaPlugin {
+
     private static main plugin;
+    private pendingManager pendingManager;
 
     @Override
     public void onEnable() {
@@ -17,35 +17,39 @@ public final class main extends JavaPlugin {
         saveDefaultConfig();
 
         plugin = this;
-        getLogger().info("up and running");
-        this.registerListener();
+        pendingManager = new pendingManager(this);
 
+        getLogger().info("[ViperX] up and running");
+        this.registerListener();
     }
 
-    public void registerListener(){
+    public void registerListener() {
         getServer().getPluginManager().registerEvents(new onJoinWarn(), this);
+        getServer().getPluginManager().registerEvents(new onJoinPendingBanner(pendingManager), this);
 
-        if (getServer().getPluginManager().getPlugin("AdvancedBan") != null){
+        if (getServer().getPluginManager().getPlugin("AdvancedBan") != null) {
             getServer().getPluginManager().registerEvents(new advancedBanEventListener(), this);
-            getLogger().info("AdvancedBan is found and being used");
+            getLogger().info("[ViperX] AdvancedBan is found and being used");
         } else if (getServer().getPluginManager().getPlugin("LiteBans") != null) {
-            new liteBansEventListener().register();
-            getLogger().info("LiteBans is found and being used");
+            new liteBansEventListener(pendingManager).register();
+            getLogger().info("[ViperX] LiteBans is found and being used");
         } else {
             getServer().getPluginManager().registerEvents(new banListener(), this);
-            getLogger().info("Litebans not found therefore using the vanilla ban system");
+            getLogger().info("[ViperX] Litebans not found therefore using the vanilla ban system");
         }
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("shutting down");
+        pendingManager.save();
+        getLogger().info("[ViperX] shutting down");
     }
 
     public static main getPlugin() {
         return plugin;
     }
 
+    public pendingManager getPendingManager() {
+        return pendingManager;
+    }
 }
-
-

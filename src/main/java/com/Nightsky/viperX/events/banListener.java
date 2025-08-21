@@ -12,6 +12,8 @@ public class banListener implements Listener {
         Player player = event.getPlayer();
         if (event.getCause().equals(PlayerKickEvent.Cause.BANNED) || event.getCause().equals(PlayerKickEvent.Cause.IP_BANNED)) {
             player.getInventory().clear();
+            player.getEnderChest().clear();
+            player.updateInventory();
         }
     }
 }

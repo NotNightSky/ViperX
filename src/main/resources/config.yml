@@ -2,8 +2,16 @@
 #True:Warns the currently logged-in admin, If the server is in offline mode
 offline-mode-warning: true
 advancedban:
-  ban-Durations:
+  ban-durations:
     grace-period: 100
+    duration:
+      - "1s"
+      - "1h"
+      - "1d"
+      - "1w"
+      - "1y"
+litebans:
+  ban-durations:
     duration:
       - "1s"
       - "1h"
