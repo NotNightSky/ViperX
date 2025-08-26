@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class durationParser {
-    //Don't ask me to explain me this code, I did not write this
-    //some unused stuff will be used with litebans so do not remove them
+   //Hashmap for Times
     private static final Map<String, Long> timeUnits = new HashMap<>();
 
     static {
@@ -21,7 +20,7 @@ public class durationParser {
     public static long parseToMillis(String input) {
         long totalMillis = 0;
 
-        // Normalize input
+        // Interpret input
         String normalized = input
                 .toLowerCase()
                 .replaceAll("days?|day\\(s\\)", "d")
@@ -32,7 +31,7 @@ public class durationParser {
                 .replaceAll("and", "")
                 .replaceAll("\\s+", " ")
                 .trim();
-
+        // matching pattern
         Pattern pattern = Pattern.compile("(\\d+)\\s*(y|w|d|h|m|s)");
         Matcher matcher = pattern.matcher(normalized);
 
