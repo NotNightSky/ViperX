@@ -2,8 +2,7 @@ package com.Nightsky.viperX;
 
 import com.Nightsky.viperX.commands.viperXMenuCommand;
 import com.Nightsky.viperX.events.*;
-import com.Nightsky.viperX.menu.mainMenu;
-import com.Nightsky.viperX.menu.settings;
+import com.Nightsky.viperX.menu.*;
 import com.Nightsky.viperX.utils.pendingManager;
 import com.Nightsky.viperX.utils.metrics;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,7 +30,10 @@ public class main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onJoinWarn(), this);
         getServer().getPluginManager().registerEvents(new onJoinPendingBanner(pendingManager), this);
         getServer().getPluginManager().registerEvents(new mainMenu(), this);
-        getServer().getPluginManager().registerEvents(new settings(), this);
+        getServer().getPluginManager().registerEvents(new settingsMenu(), this);
+        getServer().getPluginManager().registerEvents(new banDurationMenu(), this);
+        getServer().getPluginManager().registerEvents(new pendingMenu(), this);
+        getServer().getPluginManager().registerEvents(new linksMenu(), this);
 
         if (getServer().getPluginManager().getPlugin("AdvancedBan") != null) {
             getServer().getPluginManager().registerEvents(new advancedBanEventListener(), this);

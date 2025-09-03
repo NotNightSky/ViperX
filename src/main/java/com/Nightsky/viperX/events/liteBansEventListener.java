@@ -37,14 +37,14 @@ public class liteBansEventListener {
                         }
                     } else {
                         long banDuration = entry.getDuration();
-                        List<String> durationList = main.getPlugin().getConfig().getStringList("litebans.ban-durations.duration");
+                        List<String> durationList = main.getPlugin().getConfig().getStringList("global.ban-durations.duration");
                         List<Long> parsedDurations = new ArrayList<>();
 
                         for (String durationStr : durationList) {
                             long millis = durationParser.parseToMillis(durationStr);
                             parsedDurations.add(millis);
-                            main.getPlugin().getLogger().info("ban duration should be: " + banDuration);
-                            main.getPlugin().getLogger().info("Parsed: \"" + durationStr + "\" = " + millis + " ms");
+                            main.getPlugin().getLogger().info("[ViperX] ban duration should be: " + banDuration);
+                            main.getPlugin().getLogger().info("[ViperX] Parsed: \"" + durationStr + "\" = " + millis + " ms");
                         }
 
                         for (long parsed : parsedDurations) {

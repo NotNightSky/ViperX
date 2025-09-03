@@ -1,5 +1,5 @@
 name: ViperX
-version: '2.1.0'
+version: '3.0.0'
 main: com.Nightsky.viperX.main
 api-version: '1.21.8'
 # depend: [NbtApi]

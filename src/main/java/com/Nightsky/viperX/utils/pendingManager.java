@@ -26,7 +26,7 @@ public class pendingManager {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                plugin.getLogger().severe("Could not create pending.yml: " + e.getMessage());
+                plugin.getLogger().severe("[ViperX] Could not create pending.yml: " + e.getMessage());
             }
         }
 
@@ -39,7 +39,7 @@ public class pendingManager {
                 try {
                     pendingClear.add(UUID.fromString(uuidStr));
                 } catch (IllegalArgumentException e) {
-                    plugin.getLogger().warning("Invalid UUID in pending.yml: " + uuidStr);
+                    plugin.getLogger().warning("[ViperX] Invalid UUID in pending.yml: " + uuidStr);
                 }
             }
         }
@@ -74,7 +74,7 @@ public class pendingManager {
             config.set("pending", pendingClear.stream().map(UUID::toString).toList());
             config.save(file);
         } catch (IOException e) {
-            plugin.getLogger().severe("Failed to save pending.yml: " + e.getMessage());
+            plugin.getLogger().severe("[ViperX] Failed to save pending.yml: " + e.getMessage());
         }
     }
 }

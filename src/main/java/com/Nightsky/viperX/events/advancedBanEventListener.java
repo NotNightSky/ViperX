@@ -25,9 +25,9 @@ public class advancedBanEventListener implements Listener {
 
         Duration duration = Duration.between(start, end);
         long banDuration = duration.toMillis();
-        List<String> durationList = main.getPlugin().getConfig().getStringList("advancedban.ban-durations.duration");
+        List<String> durationList = main.getPlugin().getConfig().getStringList("global.ban-durations.duration");
         List<Long> parsedDurations = new ArrayList<>();
-        main.getPlugin().getLogger().info(String.valueOf(main.getPlugin().getConfig().getInt("advancedban.ban-Durations.grace-period")));
+        main.getPlugin().getLogger().info(String.valueOf(main.getPlugin().getConfig().getInt("global.ban-Durations.grace-period")));
         if(punishment.getPunishment().getType() == PunishmentType.BAN){
             String playerName = punishment.getPunishment().getName();
             OfflinePlayer offPlayer= Bukkit.getServer().getOfflinePlayer(playerName);
@@ -45,13 +45,13 @@ public class advancedBanEventListener implements Listener {
             for (String durationStr : durationList) {
                 long millis = durationParser.parseToMillis(durationStr);
                 parsedDurations.add(millis);
-                main.getPlugin().getLogger().info("ban duration should be " + banDuration);
-                main.getPlugin().getLogger().info("Parsed: \"" + durationStr + "\" = " + millis + " ms");
+                main.getPlugin().getLogger().info("[ViperX] ban duration should be " + banDuration);
+                main.getPlugin().getLogger().info("[ViperX] Parsed: \"" + durationStr + "\" = " + millis + " ms");
             }
 
             for (long parsed : parsedDurations) {
-                if (banDuration == parsed || Math.abs(banDuration - parsed) <= main.getPlugin().getConfig().getInt("advancedban.ban-Durations.grace-period")) {
-                    main.getPlugin().getLogger().info("Ban duration matches config value: " + parsed + " ms");
+                if (banDuration == parsed || Math.abs(banDuration - parsed) <= main.getPlugin().getConfig().getInt("global.ban-Durations.grace-period")) {
+                    main.getPlugin().getLogger().info("[ViperX] Ban duration matches config value: " + parsed + " ms");
                     String playerName = punishment.getPunishment().getName();
                     OfflinePlayer offPlayer= Bukkit.getServer().getOfflinePlayer(playerName);
 

@@ -17,9 +17,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
-public class settings implements Listener {
+public class settingsMenu implements Listener {
     private static final String GUI_TITLE = ChatColor.DARK_RED + "Settings Menu";
     private static final Map<UUID, Boolean> awaitingDurationInput = new HashMap<>();
+
+    public static void startAwaitingDurationInput(Player player) {
+        awaitingDurationInput.put(player.getUniqueId(), true);
+        player.sendMessage(ChatColor.AQUA +
+                "Enter a duration (e.g., 1s, 5m, 2h, 1d) or type 'remove <value>' to delete.");
+    }
 
     public static void open(Player player) {
         FileConfiguration config = main.getPlugin().getConfig();
@@ -32,15 +38,14 @@ public class settings implements Listener {
                         + (offlineWarning ? ChatColor.GREEN + "Enabled" : ChatColor.GRAY + "Disabled")));
 
         // Grace period
-        int grace = config.getInt("advancedban.ban-durations.grace-period");
+        int grace = config.getInt("global.ban-durations.grace-period");
         gui.setItem(4, createMenuItem(Material.CLOCK,
                 ChatColor.GOLD + "Grace Period: " + grace + " ms" + ChatColor.GRAY + " (LMB -100 / RMB +100)"));
 
-        // Ban durations
-        List<String> durations = config.getStringList("advancedban.ban-durations.duration");
+        // Ban durations link
         gui.setItem(6, createMenuItem(Material.PAPER,
-                ChatColor.AQUA + "Ban Durations: " + String.join(", ", durations),
-                ChatColor.GRAY + "Click to add/remove"));
+                ChatColor.AQUA + "Ban Durations",
+                ChatColor.GRAY + "Click to manage"));
 
         player.openInventory(gui);
     }
@@ -76,19 +81,15 @@ public class settings implements Listener {
                 open(player);
             }
             case CLOCK -> {
-                int grace = config.getInt("advancedban.ban-durations.grace-period");
+                int grace = config.getInt("global.ban-durations.grace-period");
                 if (event.isLeftClick()) grace = Math.max(0, grace - 100);
                 if (event.isRightClick()) grace += 100;
-                config.set("advancedban.ban-durations.grace-period", grace);
+                config.set("global.ban-durations.grace-period", grace);
                 main.getPlugin().saveConfig();
                 player.sendMessage(ChatColor.YELLOW + "Grace Period updated: " + grace + " ms");
                 open(player);
             }
-            case PAPER -> {
-                player.closeInventory();
-                awaitingDurationInput.put(player.getUniqueId(), true);
-                player.sendMessage(ChatColor.AQUA + "Enter a duration (e.g., 1s, 5m, 2h, 1d) or type 'remove <value>' to delete:");
-            }
+            case PAPER -> banDurationMenu.open(player);
         }
     }
 
@@ -98,27 +99,28 @@ public class settings implements Listener {
         if (!awaitingDurationInput.containsKey(player.getUniqueId())) return;
 
         event.setCancelled(true);
-        String msg = event.getMessage();
+        String msg = event.getMessage().trim();
         FileConfiguration config = main.getPlugin().getConfig();
-        List<String> durations = new ArrayList<>(config.getStringList("advancedban.ban-durations.duration"));
+        List<String> durations = new ArrayList<>(config.getStringList("global.ban-durations.duration"));
 
         if (msg.toLowerCase().startsWith("remove ")) {
             String target = msg.substring(7).trim();
             if (durations.remove(target)) {
-                config.set("advancedban.ban-durations.duration", durations);
+                config.set("global.ban-durations.duration", durations);
                 main.getPlugin().saveConfig();
+                main.getPlugin().reloadConfig();
                 player.sendMessage(ChatColor.RED + "Removed duration: " + target);
             } else {
                 player.sendMessage(ChatColor.GRAY + "Duration not found: " + target);
             }
         } else {
             try {
-                // validate by parsing
                 long millis = durationParser.parseToMillis(msg);
                 if (millis > 0) {
                     durations.add(msg);
-                    config.set("advancedban.ban-durations.duration", durations);
+                    config.set("global.ban-durations.duration", durations);
                     main.getPlugin().saveConfig();
+                    main.getPlugin().reloadConfig();
                     player.sendMessage(ChatColor.GREEN + "Added duration: " + msg + " (" + millis + " ms)");
                 } else {
                     player.sendMessage(ChatColor.RED + "Invalid duration: " + msg);
@@ -129,6 +131,8 @@ public class settings implements Listener {
         }
 
         awaitingDurationInput.remove(player.getUniqueId());
-        Bukkit.getScheduler().runTask(main.getPlugin(), () -> open(player));
+
+        // reopen ban duration menu safely
+        Bukkit.getScheduler().runTask(main.getPlugin(), () -> banDurationMenu.open(player));
     }
 }

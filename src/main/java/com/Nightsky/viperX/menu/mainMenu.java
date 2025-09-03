@@ -47,15 +47,9 @@ public class mainMenu implements Listener {
             Material clicked = event.getCurrentItem().getType();
 
             switch (clicked) {
-                case CLOCK -> {
-                //TODO
-                }
-                case COMMAND_BLOCK -> {
-                settings.open(player);
-                }
-                case BOOK -> {
-                    //TODO
-                }
+                case CLOCK -> pendingMenu.open(player);
+                case COMMAND_BLOCK -> settingsMenu.open(player);
+                case BOOK -> linksMenu.open(player);
             }
         }
     }

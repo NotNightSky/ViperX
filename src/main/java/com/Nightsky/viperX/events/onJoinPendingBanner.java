@@ -33,7 +33,7 @@ public class onJoinPendingBanner implements Listener {
             pendingManager.remove(id);
             pendingManager.save();
 
-            main.getPlugin().getLogger().info("Cleared inventory for banned player on join: " + player.getName());
+            main.getPlugin().getLogger().info("[ViperX] Cleared inventory for banned player on join: " + player.getName());
         }
     }
 }

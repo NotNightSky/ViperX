@@ -16,7 +16,7 @@ public class onJoinWarn implements Listener {
 
         if (offlineModeWarn && player.isOp()){
             player.sendMessage("§l§4[ViperX]§4§l " + "§l§o§4The server is currently in offline mode(aka online-mode = false) which can lead to some issues with the plugin although it has been tested with offline clients§4§o§l");
-            player.sendMessage("§l§4[ViperX]§4§l " + "§eTo disable this warning, refer to viperx wiki§e");
+            player.sendMessage("§l§4[ViperX]§4§l " + "§eTo disable this warning, open setting menu(/viperx or /vx)");
         }
 
     }
