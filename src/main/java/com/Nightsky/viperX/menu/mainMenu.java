@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class mainMenu implements Listener {
-    private static final String GUI_TITLE = ChatColor.DARK_RED + "Ban Options";
+    private static final String GUI_TITLE = ChatColor.DARK_RED + "ViperX";
 
     public static void open(Player player) {
         Inventory gui = Bukkit.createInventory(null, 9, GUI_TITLE);
