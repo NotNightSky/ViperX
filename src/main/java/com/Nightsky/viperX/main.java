@@ -3,8 +3,9 @@ package com.Nightsky.viperX;
 import com.Nightsky.viperX.commands.viperXMenuCommand;
 import com.Nightsky.viperX.events.*;
 import com.Nightsky.viperX.menu.*;
+
+import com.Nightsky.viperX.utils.MetricsLite;
 import com.Nightsky.viperX.utils.pendingManager;
-import com.Nightsky.viperX.utils.metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class main extends JavaPlugin {
@@ -15,7 +16,7 @@ public class main extends JavaPlugin {
     @Override
     public void onEnable() {
         int pluginId = 26811;
-        metrics metrics = new metrics(this, pluginId);
+        MetricsLite metricsLite = new MetricsLite(this, pluginId);
         saveDefaultConfig();
 
         plugin = this;

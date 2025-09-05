@@ -1,6 +1,7 @@
 package com.Nightsky.viperX.menu;
 
 import com.Nightsky.viperX.main;
+import com.Nightsky.viperX.utils.inventoryUtils;
 import com.Nightsky.viperX.utils.pendingManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -72,8 +73,11 @@ public class pendingMenu implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (!event.getView().getTitle().equals(GUI_TITLE)) return;
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+        if (!inventoryUtils.getTitle(event).equals(GUI_TITLE)) return;
+
+
 
         event.setCancelled(true);
         if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) return;

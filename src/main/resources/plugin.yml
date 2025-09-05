@@ -1,7 +1,7 @@
 name: ViperX
-version: '3.0.0'
+version: '4.0.0'
 main: com.Nightsky.viperX.main
-api-version: '1.21.8'
+api-version: '1.8.8'
 # depend: [NbtApi]
 softdepend: [AdvancedBan, LiteBans]
 commands:

@@ -71,8 +71,18 @@ public class banDurationMenu implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (!event.getView().getTitle().equals(GUI_TITLE)) return;
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+
+        // Cross-version safe title check
+        String title;
+        try {
+            title = event.getView().getTitle(); // 1.14+
+        } catch (NoSuchMethodError e) {
+            title = event.getInventory().getTitle(); // 1.8 – 1.13
+        }
+
+        if (!title.equals(GUI_TITLE)) return;
 
         event.setCancelled(true);
         if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) return;
@@ -90,7 +100,12 @@ public class banDurationMenu implements Listener {
 
                 player.sendMessage(ChatColor.RED + "Removed duration: " + name);
 
-                Bukkit.getScheduler().runTask(main.getPlugin(), () -> open(player));
+                Bukkit.getScheduler().runTask(main.getPlugin(), new Runnable() {
+                    @Override
+                    public void run() {
+                        open(player);
+                    }
+                });
             }
         } else if (clicked == Material.EMERALD_BLOCK) {
             player.closeInventory();

@@ -53,8 +53,18 @@ public class linksMenu implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (!event.getView().getTitle().equals(GUI_TITLE)) return;
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+
+        // Cross-version safe title check
+        String title;
+        try {
+            title = event.getView().getTitle(); // 1.14+
+        } catch (NoSuchMethodError e) {
+            title = event.getInventory().getTitle(); // 1.8 – 1.13
+        }
+
+        if (!title.equals(GUI_TITLE)) return;
 
         event.setCancelled(true);
         if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) return;
@@ -62,18 +72,20 @@ public class linksMenu implements Listener {
         Material clicked = event.getCurrentItem().getType();
 
         switch (clicked) {
-            case BOOK -> {
+            case BOOK:
                 player.closeInventory();
                 player.sendMessage(ChatColor.GREEN + "GitHub: " + ChatColor.UNDERLINE + "https://github.com/xmoderlive");
-            }
-            case PAPER -> {
+                break;
+            case PAPER:
                 player.closeInventory();
                 player.sendMessage(ChatColor.RED + "YouTube: " + ChatColor.UNDERLINE + "https://youtube.com/@SkysVaultWasTaken");
-            }
-            case BOOKSHELF -> {
+                break;
+            case BOOKSHELF:
                 player.closeInventory();
                 player.sendMessage(ChatColor.AQUA + "Wiki: " + ChatColor.UNDERLINE + "https://github.com/xmoderlive/ViperX/wiki");
-            }
+                break;
+            default:
+                break;
         }
     }
 }

@@ -71,7 +71,9 @@ public class pendingManager {
     //Save the current list to file
     public void save() {
         try {
-            config.set("pending", pendingClear.stream().map(UUID::toString).toList());
+            config.set("pending", pendingClear.stream()
+                    .map(UUID::toString)
+                    .collect(java.util.stream.Collectors.toList()));
             config.save(file);
         } catch (IOException e) {
             plugin.getLogger().severe("[ViperX] Failed to save pending.yml: " + e.getMessage());

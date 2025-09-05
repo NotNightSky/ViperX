@@ -1,4 +1,5 @@
 package com.Nightsky.viperX.events;
+
 import com.Nightsky.viperX.main;
 import com.Nightsky.viperX.utils.durationParser;
 import me.leoko.advancedban.bukkit.event.PunishmentEvent;
@@ -10,8 +11,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import java.io.File;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -20,27 +19,15 @@ public class advancedBanEventListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onEvent(PunishmentEvent punishment) {
-        Instant start = Instant.ofEpochMilli(punishment.getPunishment().getStart());
-        Instant end = Instant.ofEpochMilli(punishment.getPunishment().getEnd());
+        long start = punishment.getPunishment().getStart();
+        long end = punishment.getPunishment().getEnd();
+        long banDuration = end - start;
 
-        Duration duration = Duration.between(start, end);
-        long banDuration = duration.toMillis();
         List<String> durationList = main.getPlugin().getConfig().getStringList("global.ban-durations.duration");
         List<Long> parsedDurations = new ArrayList<>();
-        main.getPlugin().getLogger().info(String.valueOf(main.getPlugin().getConfig().getInt("global.ban-Durations.grace-period")));
-        if(punishment.getPunishment().getType() == PunishmentType.BAN){
-            String playerName = punishment.getPunishment().getName();
-            OfflinePlayer offPlayer= Bukkit.getServer().getOfflinePlayer(playerName);
 
-            UUID id = offPlayer.getUniqueId();
-
-            File playerDataFileMain = new File(Bukkit.getWorlds().getFirst().getWorldFolder(), "playerdata" + File.separator + id + ".dat");
-
-            playerDataFileMain.delete();
-
-            File playerDataFileOld = new File(Bukkit.getWorlds().getFirst().getWorldFolder(), "playerdata" + File.separator + id + ".dat_old");
-
-            playerDataFileOld.delete();
+        if (punishment.getPunishment().getType() == PunishmentType.BAN) {
+            clearPlayerData(punishment.getPunishment().getName());
         } else if (punishment.getPunishment().getType() == PunishmentType.TEMP_BAN) {
             for (String durationStr : durationList) {
                 long millis = durationParser.parseToMillis(durationStr);
@@ -49,24 +36,28 @@ public class advancedBanEventListener implements Listener {
                 main.getPlugin().getLogger().info("[ViperX] Parsed: \"" + durationStr + "\" = " + millis + " ms");
             }
 
+            int grace = main.getPlugin().getConfig().getInt("global.ban-durations.grace-period");
+
             for (long parsed : parsedDurations) {
-                if (banDuration == parsed || Math.abs(banDuration - parsed) <= main.getPlugin().getConfig().getInt("global.ban-Durations.grace-period")) {
+                if (banDuration == parsed || Math.abs(banDuration - parsed) <= grace) {
                     main.getPlugin().getLogger().info("[ViperX] Ban duration matches config value: " + parsed + " ms");
-                    String playerName = punishment.getPunishment().getName();
-                    OfflinePlayer offPlayer= Bukkit.getServer().getOfflinePlayer(playerName);
-
-                    UUID id = offPlayer.getUniqueId();
-
-                    File playerDataFileMain = new File(Bukkit.getWorlds().getFirst().getWorldFolder(), "playerdata" + File.separator + id + ".dat");
-
-                    playerDataFileMain.delete();
-
-                    File playerDataFileOld = new File(Bukkit.getWorlds().getFirst().getWorldFolder(), "playerdata" + File.separator + id + ".dat_old");
-
-                    playerDataFileOld.delete();
+                    clearPlayerData(punishment.getPunishment().getName());
                     break;
                 }
             }
         }
+    }
+
+    private void clearPlayerData(String playerName) {
+        OfflinePlayer offPlayer = Bukkit.getServer().getOfflinePlayer(playerName);
+        UUID id = offPlayer.getUniqueId();
+
+        File worldFolder = Bukkit.getWorlds().get(0).getWorldFolder();
+
+        File playerDataFileMain = new File(worldFolder, "playerdata" + File.separator + id + ".dat");
+        File playerDataFileOld = new File(worldFolder, "playerdata" + File.separator + id + ".dat_old");
+
+        if (playerDataFileMain.exists()) playerDataFileMain.delete();
+        if (playerDataFileOld.exists()) playerDataFileOld.delete();
     }
 }

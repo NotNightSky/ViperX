@@ -17,8 +17,8 @@ public class mainMenu implements Listener {
     public static void open(Player player) {
         Inventory gui = Bukkit.createInventory(null, 9, GUI_TITLE);
 
-        gui.setItem(2, createMenuItem(Material.CLOCK, ChatColor.DARK_GREEN + "Pending List"));
-        gui.setItem(4, createMenuItem(Material.COMMAND_BLOCK, ChatColor.DARK_GREEN + "Settings"));
+        gui.setItem(2, createMenuItem(Material.BEDROCK, ChatColor.DARK_GREEN + "Pending List"));
+        gui.setItem(4, createMenuItem(Material.ANVIL, ChatColor.DARK_GREEN + "Settings"));
         gui.setItem(6, createMenuItem(Material.BOOK, ChatColor.DARK_GREEN + "Links"));
 
         player.openInventory(gui);
@@ -36,7 +36,17 @@ public class mainMenu implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getView().getTitle().equals(GUI_TITLE)) {
+        // Cross-version title check
+        String title;
+        try {
+            // 1.14+ method
+            title = event.getView().getTitle();
+        } catch (NoSuchMethodError e) {
+            // 1.8 – 1.13 method
+            title = event.getInventory().getTitle();
+        }
+
+        if (title.equals(GUI_TITLE)) {
             event.setCancelled(true);
 
             if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) {
@@ -47,9 +57,17 @@ public class mainMenu implements Listener {
             Material clicked = event.getCurrentItem().getType();
 
             switch (clicked) {
-                case CLOCK -> pendingMenu.open(player);
-                case COMMAND_BLOCK -> settingsMenu.open(player);
-                case BOOK -> linksMenu.open(player);
+                case BEDROCK:
+                    pendingMenu.open(player);
+                    break;
+                case ANVIL:
+                    settingsMenu.open(player);
+                    break;
+                case BOOK:
+                    linksMenu.open(player);
+                    break;
+                default:
+                    break;
             }
         }
     }

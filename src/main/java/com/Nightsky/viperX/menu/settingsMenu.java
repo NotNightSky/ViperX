@@ -2,6 +2,7 @@ package com.Nightsky.viperX.menu;
 
 import com.Nightsky.viperX.main;
 import com.Nightsky.viperX.utils.durationParser;
+import com.Nightsky.viperX.utils.inventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -33,13 +34,13 @@ public class settingsMenu implements Listener {
 
         // Offline mode toggle
         boolean offlineWarning = config.getBoolean("offline-mode-warning");
-        gui.setItem(2, createMenuItem(Material.REDSTONE_TORCH,
+        gui.setItem(2, createMenuItem(Material.REDSTONE_BLOCK,
                 ChatColor.RED + "Offline Mode Warning: "
                         + (offlineWarning ? ChatColor.GREEN + "Enabled" : ChatColor.GRAY + "Disabled")));
 
         // Grace period
         int grace = config.getInt("global.ban-durations.grace-period");
-        gui.setItem(4, createMenuItem(Material.CLOCK,
+        gui.setItem(4, createMenuItem(Material.DIAMOND,
                 ChatColor.GOLD + "Grace Period: " + grace + " ms" + ChatColor.GRAY + " (LMB -100 / RMB +100)"));
 
         // Ban durations link
@@ -63,8 +64,9 @@ public class settingsMenu implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (!event.getView().getTitle().equals(GUI_TITLE)) return;
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+        if (!inventoryUtils.getTitle(event).equals(GUI_TITLE)) return;
 
         event.setCancelled(true);
         if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) return;
@@ -73,14 +75,14 @@ public class settingsMenu implements Listener {
         Material clicked = event.getCurrentItem().getType();
 
         switch (clicked) {
-            case REDSTONE_TORCH -> {
+            case REDSTONE_BLOCK:
                 boolean current = config.getBoolean("offline-mode-warning");
                 config.set("offline-mode-warning", !current);
                 main.getPlugin().saveConfig();
                 player.sendMessage(ChatColor.YELLOW + "Offline Mode Warning set to " + !current);
                 open(player);
-            }
-            case CLOCK -> {
+                break;
+            case DIAMOND:
                 int grace = config.getInt("global.ban-durations.grace-period");
                 if (event.isLeftClick()) grace = Math.max(0, grace - 100);
                 if (event.isRightClick()) grace += 100;
@@ -88,8 +90,12 @@ public class settingsMenu implements Listener {
                 main.getPlugin().saveConfig();
                 player.sendMessage(ChatColor.YELLOW + "Grace Period updated: " + grace + " ms");
                 open(player);
-            }
-            case PAPER -> banDurationMenu.open(player);
+                break;
+            case PAPER:
+                banDurationMenu.open(player);
+                break;
+            default:
+                break;
         }
     }
 
