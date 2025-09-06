@@ -24,6 +24,11 @@ public class pendingMenu implements Listener {
     private static final Map<UUID, Boolean> awaitingInput = new HashMap<>();
 
     public static void open(Player player) {
+        if (!player.hasPermission("viperx.pending")) {
+            player.sendMessage("§cYou do not have permission to open the Pending menu.");
+            return;
+        }
+
         pendingManager manager = main.getPlugin().getPendingManager();
         Set<UUID> pending = manager.getAll();
 

@@ -58,15 +58,25 @@ public class mainMenu implements Listener {
 
             switch (clicked) {
                 case BEDROCK:
-                    pendingMenu.open(player);
+                    if (player.hasPermission("viperx.pending")) {
+                        pendingMenu.open(player);
+                    } else {
+                        player.sendMessage("§cYou do not have permission to open the Pending menu.");
+                    }
                     break;
                 case ANVIL:
-                    settingsMenu.open(player);
+                    if (player.hasPermission("viperx.settings")) {
+                        settingsMenu.open(player);
+                    } else {
+                        player.sendMessage("§cYou do not have permission to open the Settings menu.");
+                    }
                     break;
                 case BOOK:
-                    linksMenu.open(player);
-                    break;
-                default:
+                    if (player.hasPermission("viperx.links")) {
+                        linksMenu.open(player);
+                    } else {
+                        player.sendMessage("§cYou do not have permission to open the Links menu.");
+                    }
                     break;
             }
         }

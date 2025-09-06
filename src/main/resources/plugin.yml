@@ -1,5 +1,5 @@
 name: ViperX
-version: '4.0.0'
+version: '4.1.0'
 main: com.Nightsky.viperX.main
 api-version: '1.8.8'
 # depend: [NbtApi]
@@ -8,3 +8,33 @@ commands:
   viperx:
     usage: "/viperx"
     aliases: [vx]
+permissions:
+  viperx.menu.*:
+      description: Allows access to all the ViperX menus
+      default: op
+      children:
+        viperx.mainMenu: true
+        viperx.settings: true
+        viperx.pending: true
+        viperx.links: true
+        viperx.banMenu: true
+
+  viperx.mainMenu:
+    description: Allows access of the main viperx mainMenu
+    default: op
+
+  viperx.settings:
+    description: Allows opening and modifying settings
+    default: op
+
+  viperx.pending:
+    description: Allows viewing and editing the pending clears
+    default: op
+
+  viperx.links:
+    description: Allows viewing the useful links menu
+    default: true
+
+  viperx.banMenu:
+    description: Allows managing ban durations
+    default: op

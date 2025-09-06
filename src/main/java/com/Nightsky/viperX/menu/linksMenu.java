@@ -17,6 +17,11 @@ public class linksMenu implements Listener {
     private static final String GUI_TITLE = ChatColor.DARK_BLUE + "Useful Links";
 
     public static void open(Player player) {
+        if (!player.hasPermission("viperx.links")) {
+            player.sendMessage("§cYou do not have permission to open the Links menu.");
+            return;
+        }
+
         Inventory gui = Bukkit.createInventory(null, 9, GUI_TITLE);
 
         gui.setItem(2, createMenuItem(

@@ -22,6 +22,11 @@ public class banDurationMenu implements Listener {
     private static final int MAX_SIZE = 54; // 9x6 is the maximum allowed
 
     public static void open(Player player) {
+        if (!player.hasPermission("viperx.banMenu")) {
+            player.sendMessage("§cYou do not have permission to open the Ban Duration menu.");
+            return;
+        }
+
         FileConfiguration config = main.getPlugin().getConfig();
         List<String> durations = config.getStringList("global.ban-durations.duration");
 

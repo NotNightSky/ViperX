@@ -29,6 +29,11 @@ public class settingsMenu implements Listener {
     }
 
     public static void open(Player player) {
+        if (!player.hasPermission("viperx.settings")) {
+            player.sendMessage("§cYou do not have permission to open the Settings menu.");
+            return;
+        }
+
         FileConfiguration config = main.getPlugin().getConfig();
         Inventory gui = Bukkit.createInventory(null, 9, GUI_TITLE);
 

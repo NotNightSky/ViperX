@@ -15,6 +15,11 @@ public class viperXMenuCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+
+        if (!player.hasPermission("viperx.mainMenu")) {
+            player.sendMessage("§cYou do not have permission to use this command.");
+            return true;
+        }
         mainMenu.open(player);
         return true;
     }
