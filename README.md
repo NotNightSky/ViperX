@@ -2,7 +2,7 @@
 
 [![GitHub](https://forthebadge.com/badges/gluten-free.svg)](https://github.com/xmoderlive/viperx) [![forthebadge](https://forthebadge.com/badges/built-with-love.svg)](https://github.com/xmoderlive/viperx)
 
-![Static Badge](https://img.shields.io/badge/REQUIRES%20NBT-API?style=for-the-badge&label=REQUIRES&labelColor=%23B8B9D0&color=%232A4B99&link=https%3A%2F%2Fmodrinth.com%2Fplugin%2Fnbtapi)
+![Static Badge](https://img.shields.io/badge/NBT-API?style=for-the-badge&label=REQUIRES&labelColor=%23B8B9D0&color=%232A4B99&link=https%3A%2F%2Fmodrinth.com%2Fplugin%2Fnbtapi)
 
 ![GitHub Release](https://img.shields.io/github/v/release/xmoderlive/ViperX)
 ![GitHub License](https://img.shields.io/github/license/xmoderlive/ViperX)
