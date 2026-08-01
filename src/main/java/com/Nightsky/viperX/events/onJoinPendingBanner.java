@@ -25,16 +25,10 @@ public class onJoinPendingBanner implements Listener {
         UUID id = player.getUniqueId();
 
         if (pendingManager.isPending(id)) {
-            // Clear inventory + ender chest
-            player.getInventory().clear();
-            player.getEnderChest().clear();
-            player.updateInventory();
-
-            // Remove from pending list
+            player.kickPlayer("Your Inventory is Being Cleared Due to a Ban. Please Rejoin.");
             pendingManager.remove(id);
-            pendingManager.save();
 
-            main.getPlugin().getLogger().info("[ViperX] Cleared inventory for banned player on join: " + player.getName());
+            main.getPlugin().getLogger().info("[ViperX] Kicked and cleared inventory for banned player on join: " + player.getName());
         }
     }
 }

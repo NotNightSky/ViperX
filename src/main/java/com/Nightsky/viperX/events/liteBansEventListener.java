@@ -2,6 +2,7 @@
 package com.Nightsky.viperX.events;
 
 import com.Nightsky.viperX.main;
+import com.Nightsky.viperX.utils.NBTClear;
 import com.Nightsky.viperX.utils.pendingManager;
 import com.Nightsky.viperX.utils.durationParser;
 import litebans.api.Entry;
@@ -30,7 +31,7 @@ public class liteBansEventListener {
 
                     if (entry.isPermanent()) {
                         if (player != null && player.isOnline()) {
-                            clearInventory(player);
+                            NBTClear.clearNBT(uuid);
                         } else {
                             pendingManager.add(uuid);
                             pendingManager.save();
@@ -44,14 +45,12 @@ public class liteBansEventListener {
                         for (String durationStr : durationList) {
                             long millis = durationParser.parseToMillis(durationStr);
                             parsedDurations.add(millis);
-                            main.getPlugin().getLogger().info("[ViperX] ban duration should be: " + banDuration);
-                            main.getPlugin().getLogger().info("[ViperX] Parsed: \"" + durationStr + "\" = " + millis + " ms");
                         }
 
                         for (long parsed : parsedDurations) {
                             if (banDuration == parsed){
                                 if (player != null && player.isOnline()) {
-                                    clearInventory(player);
+                                    NBTClear.clearNBT(uuid);
                                 } else {
                                     pendingManager.add(uuid);
                                     pendingManager.save();
@@ -64,12 +63,5 @@ public class liteBansEventListener {
                 }
             }
         });
-    }
-
-    private void clearInventory(Player player) {
-        player.getInventory().clear();
-        player.getEnderChest().clear();
-        player.updateInventory();
-        main.getPlugin().getLogger().info("[ViperX] Cleared inventory and ender chest for banned player: " + player.getName());
     }
 }

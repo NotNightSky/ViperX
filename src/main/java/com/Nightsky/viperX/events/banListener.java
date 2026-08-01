@@ -1,5 +1,7 @@
 package com.Nightsky.viperX.events;
 
+import com.Nightsky.viperX.utils.NBTClear;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,7 +17,6 @@ public class banListener implements Listener {
         boolean isBan = false;
 
         try {
-            // Try modern API: PlayerKickEvent#getCause()
             Method getCauseMethod = event.getClass().getMethod("getCause");
             Object cause = getCauseMethod.invoke(event);
             if (cause != null) {
@@ -25,7 +26,6 @@ public class banListener implements Listener {
                 }
             }
         } catch (NoSuchMethodException ignored) {
-            // Fallback for 1.8.9 → 1.11: check reason string
             String reason = event.getReason().toLowerCase();
             if (reason.contains("ban")) {
                 isBan = true;
@@ -35,9 +35,8 @@ public class banListener implements Listener {
         }
 
         if (isBan) {
-            player.getInventory().clear();
-            player.getEnderChest().clear();
-            player.updateInventory(); // needed for 1.8, harmless in newer versions
+            NBTClear.clearNBT(player.getUniqueId());
+            Bukkit.getLogger().info("[ViperX] Player " + player.getName() + " was banned, clearing NBT data.");
         }
     }
 }

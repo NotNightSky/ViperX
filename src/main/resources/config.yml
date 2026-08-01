@@ -3,10 +3,27 @@
 offline-mode-warning: true
 global:
   ban-durations:
+    # The amount of time the ban duration is allowed to be off by in miliseconds
     grace-period: 100
+    # The time durations that the user can be banned for to be cleared.
+    # Note that the time durations are supposed to exact and not approximate.
+    # For example, 1h will clear a player that has been banned for 1 hour, but not a player that has been banned for 1 hour and 1 minute.
+    # The support for < (less than) and > (greater than) is to be added in the future, but for now, the durations are exact.
     duration:
       - "1s"
       - "1h"
       - "1d"
       - "1w"
       - "1y"
+  # the path to the playerdata folder, where the world stores its player NBT data. This is relative to the world directory.
+  # these are the default paths for newer and older versions, but you can add more if your server uses a different path for playerdata.
+  # Note :- Do not add a trailing slash to the path, as it will be added automatically while parsing.
+  playerdata-path:
+    - "playerdata"
+    - "players/data"
+
+  # The NBT-Tags that are to be cleared from the playerdata.
+  # These are the default tags, but you can add more if your server has more NBT-Tags for playerdata.
+  NBT-Tags:
+    - "Inventory"
+    - "EnderItems"
