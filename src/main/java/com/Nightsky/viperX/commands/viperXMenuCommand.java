@@ -1,6 +1,7 @@
 package com.Nightsky.viperX.commands;
 
 import com.Nightsky.viperX.menu.mainMenu;
+import com.Nightsky.viperX.menu.linksMenu;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,11 +17,11 @@ public class viperXMenuCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if (!player.hasPermission("viperx.mainMenu")) {
-            player.sendMessage("§cYou do not have permission to use this command.");
-            return true;
+        if (player.hasPermission("viperx.mainMenu")) {
+            mainMenu.open(player);
+        } else {
+            linksMenu.open(player);
         }
-        mainMenu.open(player);
         return true;
     }
 }
